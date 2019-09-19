@@ -20,7 +20,6 @@ public class TestController {
 	}
 	
 	public String processPage2(){
-		
 		return "success";
 	}
 	

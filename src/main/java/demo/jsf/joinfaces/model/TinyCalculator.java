@@ -32,8 +32,13 @@ public class TinyCalculator {
 	}
 	
     public void showMessage() {
-        FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "summary", "details");
-        FacesContext.getCurrentInstance().addMessage("msg", facesMsg);
+    	
+    	FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "summary", "details");
+    	FacesContext.getCurrentInstance().addMessage("msg", facesMsg);
+    	
+    	FacesContext context = FacesContext.getCurrentInstance();
+    	context.addMessage("msg", new FacesMessage("Successful",  "showing messages ") );
+    
     }
 
 }

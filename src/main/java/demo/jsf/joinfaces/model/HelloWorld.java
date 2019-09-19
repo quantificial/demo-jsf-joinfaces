@@ -64,12 +64,12 @@ private String firstName = "";
   @Autowired
   HttpSession httpSession;
   
-  public String sessionId() {
+  public String getSessionId() {
 	  	  	  
 	  return httpSession.getId();
   }
   
-  public String sessionValue() {
+  public String getSessionValue() {
 	  
 	  String value = (String)httpSession.getAttribute("secret");
 	  
@@ -80,6 +80,7 @@ private String firstName = "";
   }
   
   public boolean assignSession() {
+	  
 	  httpSession.setAttribute("secret", this.value);
 	  
 	  System.out.println("setting secret session");
