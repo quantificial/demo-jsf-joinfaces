@@ -1,0 +1,10 @@
+joinfaces:
+  primefaces:
+    theme: bootstrap
+    font-awesome: true
+server:  port: 8085
+  
+#spring:  
+#  session:
+#    store-type: hazelcast  
+#    

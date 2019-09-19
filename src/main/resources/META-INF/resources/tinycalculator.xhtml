@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:sec="http://www.springframework.org/security/tags">
+
+<h:head>
+	<title>tiny calculator</title>
+	
+	<h:outputStylesheet name="/css/main.css" />
+	
+	<link rel="stylesheet" href="/webjars/font-awesome/css/all.min-jsf.css"/>
+	<link rel="stylesheet" href="/webjars/font-awesome/css/v4-shims.min-jsf.css"/>
+	
+	<h:outputStylesheet library="webjars" name="font-awesome/5.10.1/css/all.min-jsf.css" />
+	<h:outputStylesheet library="webjars" name="font-awesome/5.10.1/css/v4-shims.min-jsf.css" />
+</h:head>
+
+<h:body>
+
+	
+	<h:form id="mainForm" styleClass="container">
+	
+		<p:growl id="growl" for="msg" showDetail="true" sticky="true" /> 
+		
+		 <p:commandButton value="Ajax Submit" id="ajax" update="growl" action="#{tinyCalculator.showMessage}" style="margin-right:20px;" styleClass="ui-priority-primary" />
+		 
+		 <p:commandButton value="With Icon" id="withIcon" action="#{tinyCalculator.showMessage}" update="growl" style="margin-right:20px;" icon="pi pi-save" />
+		 	
+		<div class="alert alert-primary" role="alert">
+		  This is a primary alert—check it out!
+		</div>
+		
+
+		<div class="new">
+			good
+		</div>
+		
+		<i class="fa fa-twitter">this is testing</i>
+		<i class="fa fa-apple-alt">apple</i>
+		<i class="fas fa-atom">atom</i>
+		<i class="fa fa-fw fa-truck">x</i>
+
+		<p:commandButton icon="pi pi-info" ></p:commandButton>		
+				
+
+		<p:inputText value="#{tinyCalculator.param1}">
+			<p:ajax event="keyup" listener="#{tinyCalculator.addListener()}" 
+				update="result" />
+		</p:inputText>
+
+		<p:inputText value="#{tinyCalculator.param2}" />
+
+		<p:inputText id="result" value="#{tinyCalculator.result}" />
+		
+		<div class="btn btn-primary">
+			ok
+		</div>		
+
+		<div>
+			<p:commandButton icon="fa fa-apple-alt"  value="add.." action="#{tinyCalculator.add()}" update="result"></p:commandButton>
+		</div>
+
+
+		<div>
+			<p:inputText id="in" value="#{tinyCalculator.hiddenMessage}">
+				<p:ajax event="keyup" update="out" disabled="true"/>
+			</p:inputText>
+		</div>
+
+		<div>
+			<p:outputLabel id="out" value="#{tinyCalculator.hiddenMessage}" />
+		</div>
+
+		<div>
+			<h:panelGrid columns="2">
+				<p:outputLabel for="jsfCompSuite" value="Component Suite" />
+				<p:selectOneRadio id="jsfCompSuite"
+					value="#{tinyCalculator.componentSuite}">
+					<f:selectItem itemLabel="ICEfaces" itemValue="ICEfaces" />
+					<f:selectItem itemLabel="RichFaces" itemValue="Richfaces" />
+				</p:selectOneRadio>
+			</h:panelGrid>
+		</div>
+		
+		<p:commandButton value="Submit" update="out" icon="ui-icon-check" />  
+
+	</h:form>
+
+</h:body>
+</html>

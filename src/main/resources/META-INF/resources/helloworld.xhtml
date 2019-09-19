@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:sec="http://www.springframework.org/security/tags">
+
+<h:head>
+	<title>JSF Demo</title>
+
+	
+	
+	<h:outputStylesheet name="css/main.css" />	
+			
+	<style>
+	.whiteIcon .ui-icon {
+	 background-image: url("../javax.faces.resource/images/ui-icons_ffffff_256x240.png.jsf?ln=primefaces-aristo");
+	}
+	</style>
+</h:head>
+
+<h:body>
+
+	<div class="authorization-div">
+		<p>login as: #{request.remoteUser}</p>
+		<sec:authorize access="hasRole('ROLE_USER')">
+			<p:outputLabel value="You have the USER role" /><p/>
+		</sec:authorize>
+		<sec:authorize access="hasRole('ROLE_ADMIN')">
+			<p:outputLabel value="You have the ADMIN role" /><p/>
+		</sec:authorize>
+		<sec:authorize access="hasRole('ROLE_TRY')">
+			<p:outputLabel value="You have the TRY role" /><p/>
+		</sec:authorize>
+	</div>
+
+	<h:form>
+	
+	<p:growl id="growl" for="msg" showDetail="true" sticky="true" />
+	<p:commandButton icon="ui-icon-print" value="Ajax Submit" id="ajax" update="growl" action="#{tinyCalculator.showMessage}" style="margin-right:20px;" styleClass="whiteIcon ui-priority-primary pull-left" />
+	
+	<p:commandButton type="button" value="fa fa-folder-open" icon="fa fa-folder-open" />
+	
+	<p:commandButton type="button" value="ui-icon-document" icon="ui-icon-document" />
+	
+	<div class="main-form">
+	<h2>
+		<h:outputText value="#{msg['welcome.jsf']}" />
+	</h2>
+	<h3>
+		<h:outputText value="#{helloWorld.sessionId()}"></h:outputText>
+	</h3>
+	<h4>
+		
+		<p:inputText id="sessionValueInput" value="#{helloWorld.value}" />
+		<p:commandButton icon="ui-icon-print" value="Ajax Session" id="ajaxSession" update="sessionValueText" action="#{helloWorld.assignSession()}" style="margin-right:20px;" styleClass="whiteIcon ui-priority-primary pull-left" />
+		<h:outputText id="sessionValueText" value="#{helloWorld.sessionValue()}" />			
+	</h4>
+	
+	</div>
+		<p:panel header="Simple Widgets Demo" >
+			<h:panelGrid columns="2" cellpadding="4">
+
+				<h:outputText value="First Name: " />
+				<p:inputText value="#{helloWorld.firstName}" />
+
+				<h:outputText value="Last Name: " />
+				<p:inputText value="#{helloWorld.lastName}" />
+
+				<p:commandButton value="Submit" update="greeting"
+					oncomplete="PF('greetingDialog').show()" />
+
+				<p:commandButton value="Greeting" action="greeting" />
+				
+    			<p:commandButton action="#{testController.processPage1}" value="Page1" />
+    			<p:commandButton action="#{testController.processPage2}" value="Page2" />
+    			
+			</h:panelGrid>
+		</p:panel>
+
+		<p:dialog header="Greeting" widgetVar="greetingDialog" modal="true"
+			resizable="false">
+			<h:panelGrid id="greeting" columns="1" cellpadding="4">
+				<h:outputText value="#{helloWorld.showGreeting()}" />
+			</h:panelGrid>
+		</p:dialog>
+	</h:form>
+
+	<h:form onsubmit="this.action='#{request.contextPath}/logout';"
+		class="logout-form">
+		<p:commandButton value="Logout" ajax="false" />
+	</h:form>
+
+</h:body>
+</html>
