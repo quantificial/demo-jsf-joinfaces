@@ -24,7 +24,7 @@
 			<default-locale>en</default-locale>
 		</locale-config>
 		<resource-bundle>
-			<base-name>welcome</base-name>
+			<base-name>message</base-name>
 			<var>msg</var>
 		</resource-bundle>
 		<message-bundle>

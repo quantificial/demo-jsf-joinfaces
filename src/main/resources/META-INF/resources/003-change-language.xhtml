@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:sec="http://www.springframework.org/security/tags">
+
+<h:head>
+	<title>Hello World Demo</title>
+
+
+	<h:outputScript name="js/nanoscroller.js" library="icarus-layout" />
+	<h:outputScript name="js/layout.js" library="icarus-layout" />
+	<h:outputStylesheet name="css/animate.css" library="icarus-layout" />
+	<h:outputStylesheet name="css/nanoscroller.css" library="icarus-layout" />
+	<h:outputStylesheet name="css/layout-blue.css" library="icarus-layout" />
+	<h:outputStylesheet name="css/main.css" />	
+	
+	<style type="text/css">
+
+		.ui-g div {
+			border: 1px solid #fafafa;
+		}
+		
+		#menu {
+			margin: 0.2em;
+			padding: 1em;
+		}
+		
+		body {
+			/*background-color: yellow;*/
+			font-family: 'Roboto Condensed','Noto+Sans+TC', sans-serif !important;	
+		}
+	
+	</style>
+</h:head>
+
+<h:body>
+
+	<!-- 
+		show how to switch language and use language properties file
+		refer to the LanguageBean
+	 -->
+	<div class="ui-g">
+		<div class="ui-g-12 box blueBack" id="menu">this is the menu...</div>
+		<div class="ui-g-12 ui-md-6 ui-lg-6 box yellowBack">this is
+			testing</div>
+		<div class="ui-g-12 ui-md-6 ui-lg-6 box yellowBack">this is
+			testing</div>
+		<div class="ui-g-12">
+			<div class="ui-panel ui-widget ui-widget-content ui-corner-all">
+				<div
+					class="ui-panel-titlebar ui-widget-header ui-helper-clearfix ui-corner-all">
+					<span class="ui-panel-title">Contacts</span>
+				</div>
+				<div class="ui-panel-content ui-widget-content">testing</div>
+			</div>
+		</div>
+
+		<div class="ui-g-12">
+			<h:form>
+
+				<h2>
+					<h:outputText value="#{msg['welcome.jsf']}" />
+				</h2>
+
+				<h:panelGrid columns="2">
+				
+					Language : 
+					<h:selectOneMenu value="#{language.localeCode}" onchange="submit()"
+									valueChangeListener="#{language.countryLocaleCodeChanged}">
+									<f:selectItems value="#{language.countriesInMap}" />
+					</h:selectOneMenu>
+
+				</h:panelGrid>
+
+			</h:form>
+		</div>
+
+	</div>
+
+	<div class="card">
+		<p:commandButton type="button" value="folder icon"
+			icon="fa fa-folder-open" />
+	</div>
+
+
+
+</h:body>
+</html>
