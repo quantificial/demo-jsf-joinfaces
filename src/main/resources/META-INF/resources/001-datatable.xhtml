@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:sec="http://www.springframework.org/security/tags">
+
+<h:head>
+	<title>Hello World Demo</title>
+
+
+	<h:outputScript name="js/nanoscroller.js" library="icarus-layout" />
+	<h:outputScript name="js/layout.js" library="icarus-layout" />
+	<h:outputStylesheet name="css/animate.css" library="icarus-layout" />
+	<h:outputStylesheet name="css/nanoscroller.css" library="icarus-layout" />
+	<h:outputStylesheet name="css/layout-blue.css" library="icarus-layout" />
+
+	<style type="text/css">
+.ui-g div {
+	border: 1px solid #fafafa;
+}
+
+#menu {
+	margin: 0.2em;
+	padding: 1em;
+}
+</style>
+</h:head>
+
+<h:body>
+
+	<!-- 
+		show how to use datatable and pagination
+		
+		for large dataset, it is required to use lazymodel
+	 -->
+	<div class="ui-g">
+		<div class="ui-g-12 box blueBack" id="menu">this is the menu...</div>
+		<div class="ui-g-12 ui-md-6 ui-lg-6 box yellowBack">this is
+			testing</div>
+		<div class="ui-g-12 ui-md-6 ui-lg-6 box yellowBack">this is
+			testing</div>
+
+		<div class="ui-g-12 ui-md-12 ui-lg-12">
+			<p:dataTable var="car" value="#{carController.cars}" rows="1" paginator="true"
+                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                 rowsPerPageTemplate="1,2,3,5,10,15,20">
+				<p:column headerText="Id">
+					<h:outputText value="#{car.id}" />
+				</p:column>
+
+				<p:column headerText="Year">
+					<h:outputText value="#{car.year}" />
+				</p:column>
+
+				<p:column headerText="Brand">
+					<h:outputText value="#{car.brand}" />
+				</p:column>
+
+				<p:column headerText="Color">
+					<h:outputText value="#{car.color}" />
+				</p:column>
+			</p:dataTable>
+		</div>
+
+	</div>
+
+	<div class="card">
+		<p:commandButton type="button" value="folder icon"
+			icon="fa fa-folder-open" />
+	</div>
+
+
+
+</h:body>
+</html>
