@@ -1,6 +1,7 @@
 joinfaces:
   primefaces:
-    theme: bootstrap
+    #theme: bootstrap
+    theme: icarus-blue
     font-awesome: true
 server:  port: 8085
   
