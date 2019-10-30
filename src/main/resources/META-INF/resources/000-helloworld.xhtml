@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:sec="http://www.springframework.org/security/tags">
+
+<h:head>
+	<title>Hello World Demo</title>
+
+
+	<h:outputScript name="js/nanoscroller.js" library="icarus-layout" />
+	<h:outputScript name="js/layout.js" library="icarus-layout" />
+	<h:outputStylesheet name="css/animate.css" library="icarus-layout" />
+	<h:outputStylesheet name="css/nanoscroller.css" library="icarus-layout" />
+	<h:outputStylesheet name="css/layout-blue.css" library="icarus-layout" />
+
+	<style type="text/css">
+		.ui-g div {
+			border: 1px solid #fafafa;
+		}
+		#menu {
+			margin: 0.2em;
+			padding: 1em;
+		}
+	</style>
+</h:head>
+
+<h:body>
+
+	<!-- demo of the grid css flow -->
+	<!-- 
+		show the value from the managed bean helloWorld
+	 -->
+	<div class="ui-g">
+		<div class="ui-g-12 box redBack" id="menu">this is the menu...</div>
+		<div class="ui-g-12 ui-md-6 ui-lg-3 box blueBack">this is
+			testing</div>
+		<div class="ui-g-12 ui-md-6 ui-lg-3 box redBack">this is testing</div>
+		<div class="ui-g-12 ui-md-6 ui-lg-3 box yellowBack"><h:outputText value="#{helloWorld.firstName}" /></div>
+		<div class="ui-g-12 ui-md-6 ui-lg-3 box greenBack"><h:outputText value="#{helloWorld.lastName}" /></div>
+		<div class="ui-g-12 ui-md-6 ui-lg-3 box blueBack">
+			<h:outputText value="#{helloWorld.value}" />
+		</div>
+	</div>
+
+	<p:commandButton type="button" value="folder icon"
+		icon="fa fa-folder-open" />
+
+</h:body>
+</html>
