@@ -20,7 +20,10 @@
 </h:head>
 
 <h:body>
-
+    <h:outputStylesheet name="css/animate.css" library="icarus-layout" />
+    <h:outputStylesheet name="css/nanoscroller.css" library="icarus-layout" />
+    <h:outputStylesheet name="css/layout-blue.css" library="icarus-layout" />
+        
 	<div class="authorization-div">
 		<p>login as: #{request.remoteUser}</p>
 		<sec:authorize access="hasRole('ROLE_USER')">
@@ -34,7 +37,7 @@
 		</sec:authorize>
 	</div>
 
-	<h:form>
+	<h:form class="wrapper">
 	
 		<!-- Growl displays messages in an overlay. -->
 		<p:growl id="growl" for="msg" showDetail="true" sticky="true" />
