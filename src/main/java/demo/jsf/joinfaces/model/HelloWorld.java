@@ -61,4 +61,8 @@ public class HelloWorld implements Serializable {
 
 		return true;
 	}
+	
+	public String getName() {
+		return firstName + " " + lastName;
+	}
 }

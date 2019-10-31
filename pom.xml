@@ -122,6 +122,22 @@
     		<scope>system</scope>
     		<systemPath>${project.basedir}/src/main/resources/META-INF/lib/icarus-theme-2.0.0.jar</systemPath>
 		</dependency>
+		
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.seleniumhq.selenium</groupId>
+      <artifactId>selenium-java</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.seleniumhq.selenium</groupId>
+      <artifactId>htmlunit-driver</artifactId>
+      <scope>test</scope>
+    </dependency>
 
 	</dependencies>
 

@@ -18,6 +18,7 @@
 	<style type="text/css">
 		.ui-g div {
 			border: 1px solid #fafafa;
+			height: 3em;
 		}
 		#menu {
 			margin: 0.2em;
@@ -33,6 +34,7 @@
 		show the value from the managed bean helloWorld
 	 -->
 	<div class="ui-g">
+		<h:form id="helloworld-form">
 		<div class="ui-g-12 box redBack" id="menu">this is the menu...</div>
 		<div class="ui-g-12 ui-md-6 ui-lg-3 box blueBack">this is
 			testing</div>
@@ -42,6 +44,20 @@
 		<div class="ui-g-12 ui-md-6 ui-lg-3 box blueBack">
 			<h:outputText value="#{helloWorld.value}" />
 		</div>
+		<div class="ui-g-12 ui-md-6 ui-lg-3 box blueBack">
+			<p:inputText id="firstName" value="#{helloWorld.firstName}">
+				<p:ajax event="keyup" update="finalName" />
+			</p:inputText>
+		</div>
+		<div class="ui-g-12 ui-md-6 ui-lg-3 box blueBack">
+			<p:inputText id="lastName" value="#{helloWorld.lastName}">
+				<p:ajax event="keyup" update="finalName" />
+			</p:inputText>
+		</div>	
+		<div class="ui-g-12 ui-md-6 ui-lg-3 box blueBack">
+			<h:outputText id="finalName" value="#{helloWorld.name}" />
+		</div>
+		</h:form>		
 	</div>
 
 	<p:commandButton type="button" value="folder icon"
