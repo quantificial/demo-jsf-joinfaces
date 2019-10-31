@@ -28,4 +28,9 @@ spring:
       path: /h2
       settings:
         web-allow-others: false
+        
+logging:
+  level:    root: info
+    org.springframework: info
+    
 

@@ -3,13 +3,14 @@ package demo.jsf.joinfaces.model;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 import lombok.Data;
 
 
 @Named
-@RequestScoped
+@ViewScoped
 @Data
 public class TinyCalculator {
 	

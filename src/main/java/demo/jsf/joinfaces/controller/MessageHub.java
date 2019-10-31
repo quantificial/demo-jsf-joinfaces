@@ -7,6 +7,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import demo.jsf.joinfaces.database.dao.MessageRepository;
 import demo.jsf.joinfaces.database.model.Message;
@@ -27,6 +28,7 @@ public class MessageHub {
 		messageList = messageRepository.findAll();
 	}
 	
+	@Transactional
 	public void submit() {
 		messageRepository.save(message);
 		messageList.add(message);

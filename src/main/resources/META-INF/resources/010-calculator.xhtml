@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:sec="http://www.springframework.org/security/tags">
+
+<h:head>
+	<title>tiny calculator</title>
+	
+	<h:outputScript name="js/nanoscroller.js" library="icarus-layout" />
+	<h:outputScript name="js/layout.js" library="icarus-layout" />
+	<h:outputStylesheet name="css/animate.css" library="icarus-layout" />
+	<h:outputStylesheet name="css/nanoscroller.css" library="icarus-layout" />
+	<h:outputStylesheet name="css/layout-blue.css" library="icarus-layout" />
+	<h:outputStylesheet name="primeicons/primeicons.css" library="primefaces"/>
+	
+	<h:outputStylesheet library="webjars" name="font-awesome/5.10.1/css/all.min-jsf.css" />
+	<h:outputStylesheet library="webjars" name="font-awesome/5.10.1/css/v4-shims.min-jsf.css" />
+	<style type="text/css">
+	    :root {
+      box-sizing: border-box;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: inherit;
+    }
+    .clearfix::before,
+    .clearfix::after {
+      display: table;
+      content: " ";
+    }
+    .clearfix::after {
+      clear: both;
+    }
+		#bottom {
+			padding:1em 0em 0em 0em;
+			float: right;
+		}
+	</style>
+</h:head>
+
+<h:body>
+
+	<!-- 
+	 -->
+	<div class="ui-g">
+		<div class="ui-g-12 box blueBack" id="menu">this is the menu...</div>
+		<div class="ui-g-12 ui-md-6 ui-lg-6 box yellowBack">this is
+			testing</div>
+		<div class="ui-g-12 ui-md-6 ui-lg-6 box yellowBack">this is
+			testing</div>
+		<div class="ui-g-12">
+			<p:panel header="Panel Header" >
+				<h:panelGrid columns="1" cellpadding="1">
+					this is used to display and test components
+				</h:panelGrid>
+			</p:panel>
+
+		</div>
+
+		<div class="ui-g-12 ui-md-12 ui-lg-12">
+			<h:form>
+			
+		<p:growl id="growl" for="msg" showDetail="true" sticky="true" /> 
+		
+		 <p:commandButton value="Show Message" id="ajax" update="growl" action="#{tinyCalculator.showMessage}" styleClass="ui-priority-primary" />
+		 
+		 <p:commandButton value="With Icon" id="withIcon" action="#{tinyCalculator.showMessage}" 
+		 	update="growl" icon="fa fa-home" />
+		 	
+		 <p:commandButton icon="fa fa-star" ></p:commandButton>	
+		 
+		<p:panel style="margin: 1em 0em">
+			<p:inputText value="#{tinyCalculator.param1}">
+			<p:ajax event="keyup" listener="#{tinyCalculator.addListener()}" 
+				update="result" />
+		</p:inputText>
+
+		<p:inputText value="#{tinyCalculator.param2}" />
+
+		<p:commandButton icon="fa fa-apple-alt"  value="add" action="#{tinyCalculator.add()}" update="result"></p:commandButton>
+
+		<p:inputText id="result" value="#{tinyCalculator.result}" />
+
+		</p:panel>
+		 
+
+		<div>
+			<h:panelGrid columns="2">
+				<p:outputLabel for="jsfCompSuite" value="Component Suite" />
+				<p:selectOneRadio id="jsfCompSuite"
+					value="#{tinyCalculator.componentSuite}">
+					<f:selectItem itemLabel="ICEfaces" itemValue="ICEfaces" />
+					<f:selectItem itemLabel="RichFaces" itemValue="Richfaces" />
+				</p:selectOneRadio>
+			</h:panelGrid>
+		</div>
+		
+			</h:form>
+			
+		</div>
+
+	</div>
+
+	<div class="card">
+		<div id="bottom">
+			<p:commandButton type="button" 
+			value="arrow testing" icon="fa fa-arrow-right" />
+		</div>
+		<div class="clearfix">
+		</div>
+	</div>
+	
+
+</h:body>
+</html>
