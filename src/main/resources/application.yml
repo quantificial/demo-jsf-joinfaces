@@ -13,3 +13,16 @@ spring:
   devtools:
     restart:
       enabled: false   
+  datasource:
+    driverClassName: org.h2.Driver
+    jdbcUrl: ${h2.datasource.url}
+    password: ''
+    url: jdbc:h2:mem:testdb
+    username: sa
+  h2:
+    console:
+      enabled: true
+      path: /h2
+      settings:
+        web-allow-others: false
+
