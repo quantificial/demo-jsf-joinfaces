@@ -8,13 +8,22 @@
 
 <h:head>
   <title>Login</title>
-  <h:outputStylesheet name="/css/login.css" />
+	<h:outputScript name="js/nanoscroller.js" library="icarus-layout" />
+	<h:outputScript name="js/layout.js" library="icarus-layout" />
+	<h:outputStylesheet name="css/animate.css" library="icarus-layout" />
+	<h:outputStylesheet name="css/nanoscroller.css" library="icarus-layout" />
+	<h:outputStylesheet name="css/layout-blue.css" library="icarus-layout" />
+	<h:outputStylesheet name="css/main.css" />	
+	
+	<style type="text/css">
+		
+	</style>
 </h:head>
 
 <h:body>
   <h:form prependId="false">
 
-    <p:panelGrid columns="1" styleClass="ui-fluid center ui-noborder">
+    <p:panelGrid columns="1" styleClass="ui-fluid center ui-noborder" style="margin:0 auto;">
       <h2>Please login</h2>
 
       <p:outputLabel value="Login failed!" styleClass="red"
