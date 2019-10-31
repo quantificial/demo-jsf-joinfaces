@@ -9,9 +9,12 @@ import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
 import javax.inject.Named;
+
+import lombok.extern.slf4j.Slf4j;
  
 @Named("language")
 @SessionScoped
+@Slf4j
 public class LanguageBean implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
@@ -37,6 +40,13 @@ public class LanguageBean implements Serializable{
 
 	public void setLocaleCode(String localeCode) {
 		this.localeCode = localeCode;
+	}
+	
+	public String redirect() {
+		// perform action here... 
+		// and then return to redirect
+		log.info("perform redirect");
+		return "001-helloworld.xhtml";
 	}
 
 	//value change event listener

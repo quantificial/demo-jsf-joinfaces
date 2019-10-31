@@ -81,8 +81,13 @@
 	</div>
 
 	<div class="card">
-		<p:commandButton type="button" value="folder icon"
-			icon="fa fa-folder-open" />
+		<h:form>
+			<p:commandButton id="redirect" value="click to save and redirect"
+			icon="fa fa-folder-open" action="#{language.redirect}" ajax="false"/>
+			
+			<p:commandButton value="redirect to helloworld" action="000-helloworld?faces-redirect=true" />				
+			
+		</h:form>
 	</div>
 
 
