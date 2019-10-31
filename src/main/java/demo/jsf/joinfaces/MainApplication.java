@@ -28,6 +28,7 @@ public class MainApplication implements CommandLineRunner {
 		message.setText("this is the message");
 		
 		messageRepository.save(message);
+		
 
 	}
 }
