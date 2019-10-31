@@ -3,6 +3,8 @@ package demo.jsf.joinfaces.controller;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
+import javax.faces.component.UIViewRoot;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 import demo.jsf.joinfaces.database.dao.MessageRepository;
@@ -19,6 +21,11 @@ public class ComponentHub {
 		// processing
 		
 		log.info(this.message);
+		
+		UIViewRoot root = FacesContext.getCurrentInstance().getViewRoot();
+		
+		log.info("class name: {}", root.getClass().getSimpleName());
+		log.info("family: {}", root.getFamily());
 		
 	}
 }
