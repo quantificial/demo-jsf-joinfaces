@@ -4,7 +4,9 @@ import java.io.Serializable;
 import java.util.Locale;
 
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 
@@ -15,7 +17,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import lombok.Data;
 
 @Named // use cdi managed bean
-@RequestScoped // use cdi request scope
+@ViewScoped
 @Data
 public class HelloWorld implements Serializable {
 

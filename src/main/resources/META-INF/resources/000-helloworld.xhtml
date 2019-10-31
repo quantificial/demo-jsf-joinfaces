@@ -36,26 +36,28 @@
 	<div class="ui-g">
 		<h:form id="helloworld-form">
 		<div class="ui-g-12 box redBack" id="menu">this is the menu...</div>
-		<div class="ui-g-12 ui-md-6 ui-lg-3 box blueBack">this is
-			testing</div>
+		<div class="ui-g-12 ui-md-6 ui-lg-3 box blueBack">this is testing</div>
 		<div class="ui-g-12 ui-md-6 ui-lg-3 box redBack">this is testing</div>
-		<div class="ui-g-12 ui-md-6 ui-lg-3 box yellowBack"><h:outputText value="#{helloWorld.firstName}" /></div>
-		<div class="ui-g-12 ui-md-6 ui-lg-3 box greenBack"><h:outputText value="#{helloWorld.lastName}" /></div>
+		<div class="ui-g-12 ui-md-6 ui-lg-3 box yellowBack"><h:outputText id="outputFirstName" value="#{helloWorld.firstName}" /></div>
+		<div class="ui-g-12 ui-md-6 ui-lg-3 box greenBack"><h:outputText id="outputLastName" value="#{helloWorld.lastName}" /></div>
 		<div class="ui-g-12 ui-md-6 ui-lg-3 box blueBack">
 			<h:outputText value="#{helloWorld.value}" />
 		</div>
 		<div class="ui-g-12 ui-md-6 ui-lg-3 box blueBack">
 			<p:inputText id="firstName" value="#{helloWorld.firstName}">
-				<p:ajax event="keyup" update="finalName" />
+				<p:ajax event="keyup" update="finalName outputFirstName" />
 			</p:inputText>
 		</div>
 		<div class="ui-g-12 ui-md-6 ui-lg-3 box blueBack">
 			<p:inputText id="lastName" value="#{helloWorld.lastName}">
-				<p:ajax event="keyup" update="finalName" />
+				<p:ajax event="keyup" update="finalName outputLastName" />
 			</p:inputText>
 		</div>	
 		<div class="ui-g-12 ui-md-6 ui-lg-3 box blueBack">
 			<h:outputText id="finalName" value="#{helloWorld.name}" />
+		</div>
+		<div class="ui-g-12 ui-md-12 ui-lg-12 box blueBack">
+			A table of contents, usually headed simply Contents and abbreviated informally as TOC, is a list, usually found on a page before the start of a written work, of its chapter or section titles or brief descriptions with their commencing page numbers.
 		</div>
 		</h:form>		
 	</div>
