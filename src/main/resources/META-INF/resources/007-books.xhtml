@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:sec="http://www.springframework.org/security/tags">
+
+<h:head>
+	<title>Hello World Demo</title>
+
+
+	<h:outputScript name="js/nanoscroller.js" library="icarus-layout" />
+	<h:outputScript name="js/layout.js" library="icarus-layout" />
+	<h:outputStylesheet name="css/animate.css" library="icarus-layout" />
+	<h:outputStylesheet name="css/nanoscroller.css" library="icarus-layout" />
+	<h:outputStylesheet name="css/layout-blue.css" library="icarus-layout" />
+	<h:outputStylesheet name="primeicons/primeicons.css" library="primefaces"/>
+	<style type="text/css">
+	    :root {
+      box-sizing: border-box;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: inherit;
+    }
+    .clearfix::before,
+    .clearfix::after {
+      display: table;
+      content: " ";
+    }
+    .clearfix::after {
+      clear: both;
+    }
+		#bottom {
+			padding:1em 0em 0em 0em;
+			float: right;
+		}
+	</style>
+</h:head>
+
+<h:body>
+
+	<!-- 
+	 -->
+	<div class="ui-g">
+		<div class="ui-g-12 box blueBack" id="menu">this is the menu...</div>
+		<div class="ui-g-12 ui-md-6 ui-lg-6 box yellowBack">this is
+			testing</div>
+		<div class="ui-g-12 ui-md-6 ui-lg-6 box yellowBack">this is
+			testing</div>
+		<div class="ui-g-12">
+			<p:panel header="Panel Header" >
+				<h:panelGrid columns="1" cellpadding="1">
+					this is used to test book controller
+				</h:panelGrid>
+			</p:panel>
+
+		</div>
+
+		<div class="ui-g-12 ui-md-12 ui-lg-12">
+			<h:form>
+				<h:outputLabel for="input" value="Input Book Title " />
+			 	<h:inputText id="input" value="#{books.title}" />
+			 	<h:commandButton value="Submit" action="#{books.submit}">
+			 	<!-- colon is used to reference to other components which is not in the same paraent
+			 		https://stackoverflow.com/questions/8634156/how-to-find-out-client-id-of-component-for-ajax-update-render-cannot-find-compo/8644762#8644762
+			 	 -->
+					<f:ajax execute="@form" render=":output" />
+				</h:commandButton>
+			</h:form>
+			<h:outputText id="output" value="#{books.output}" />
+			
+		</div>
+
+	</div>
+
+	<div class="card">
+		<div id="bottom">
+			<p:commandButton type="button" 
+			value="arrow testing" icon="fa fa-arrow-right" />
+		</div>
+		<div class="clearfix">
+		</div>
+	</div>
+
+
+
+</h:body>
+</html>
