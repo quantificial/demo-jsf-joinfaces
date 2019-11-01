@@ -18,8 +18,12 @@ public class AutoComplete {
 		list.add("Italy");
 		list.add("United States");
 		list.add("Russia");
+		list.add("Hong Kong");
+		list.add("China");
+		list.add("Taiwan");
+		list.add("Japan");		
 		
-		return list.stream().filter(e -> e.contains(s)).collect(Collectors.toList());
+		return list.stream().filter(e -> e.toLowerCase().contains(s.toLowerCase())).collect(Collectors.toList());
 	}
 
 	public String getCountryName() {

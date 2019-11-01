@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+	<title>Primeface Ajax Dropdown</title>
+
+	<h:outputScript name="js/nanoscroller.js" library="icarus-layout" />
+	<h:outputScript name="js/layout.js" library="icarus-layout" />
+	<h:outputStylesheet name="css/animate.css" library="icarus-layout" />
+	<h:outputStylesheet name="css/nanoscroller.css" library="icarus-layout" />
+	<h:outputStylesheet name="css/layout-blue.css" library="icarus-layout" />
+	<h:outputStylesheet name="primeicons/primeicons.css"
+		library="primefaces" />
+
+	<h:outputStylesheet library="webjars"
+		name="font-awesome/5.10.1/css/all.min-jsf.css" />
+	<h:outputStylesheet library="webjars"
+		name="font-awesome/5.10.1/css/v4-shims.min-jsf.css" />
+	<style type="text/css">
+:root {
+	box-sizing: border-box;
+}
+
+*, ::before, ::after {
+	box-sizing: inherit;
+}
+
+.clearfix::before, .clearfix::after {
+	display: table;
+	content: " ";
+}
+
+.clearfix::after {
+	clear: both;
+}
+
+#bottom {
+	padding: 1em 0em 0em 0em;
+	float: right;
+}
+</style>
+
+</h:head>
+<h:body>
+	<!-- 
+	 -->
+	<div class="ui-g">
+		<div class="ui-g-12 box blueBack" id="menu">this is the menu...</div>
+		<div class="ui-g-12 ui-md-6 ui-lg-6 box yellowBack">this is
+			testing</div>
+		<div class="ui-g-12 ui-md-6 ui-lg-6 box yellowBack">this is
+			testing</div>
+		<div class="ui-g-12">
+			<p:panel header="Panel Header">
+				<h:panelGrid columns="1" cellpadding="1">
+					test auto complete
+				</h:panelGrid>
+			</p:panel>
+
+		</div>
+
+		<div class="ui-g-12 ui-md-12 ui-lg-12">
+			<h:form id="mainForm">
+				<p:growl id="msgs" showDetail="true" />
+				<h:panelGrid columns="2" cellpadding="5">
+					<p:outputLabel value="Provide Country: " />
+					<p:autoComplete value="#{autoComplete.countryName}"
+						completeMethod="#{autoComplete.countryList}">
+					</p:autoComplete>
+				</h:panelGrid>
+
+				<p:commandButton value="Submit" icon="ui-icon-check"
+					update="outputPanel" />
+
+				<p:outputPanel id="outputPanel">
+					<p:outputLabel value="#{autoComplete.countryName}" />
+				</p:outputPanel>
+			</h:form>
+		</div>
+	</div>
+
+
+</h:body>
+</html>
