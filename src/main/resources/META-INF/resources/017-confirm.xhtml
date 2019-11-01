@@ -62,31 +62,28 @@
 
 		</div>
 
+
+
 		<div class="ui-g-12 ui-md-12 ui-lg-12">
 			<h:form id="mainForm">
-				<p:growl id="msgs" showDetail="true" />
-				<h:panelGrid columns="2" cellpadding="5">
-					<p:outputLabel value="Provide Country: " />
-					<p:autoComplete value="#{autoComplete.countryName}"
-						completeMethod="#{autoComplete.countryList}">
-					</p:autoComplete>
-				</h:panelGrid>
+				<p:growl id="message" showDetail="true" />
 
-				<p:commandButton value="Submit" icon="ui-icon-check"
-					update="outputPanel" />
+				<p:commandButton value="Delete record"
+					actionListener="#{confirmBox.confirm}" update="message">
+					<p:confirm header="Confirmation" message="Are you sure?"
+						icon="ui-icon-alert" />						
+				</p:commandButton>
+				
+				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+					<p:commandButton value="Yes" type="button"
+						styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+					<p:commandButton value="No" type="button"
+						styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+				</p:confirmDialog>
 
-				<p:outputPanel id="outputPanel">
-					<p:outputLabel value="#{autoComplete.countryName}" />
-				</p:outputPanel>
 			</h:form>
 		</div>
-		
-		<div class="ui-g-12 ui-md-12 ui-lg-12">
-			<h:form>
-				<p:growl id="msgs" showDetail="true" />
-				<p:inputTextarea rows="10" cols="50" completeMethod="#{autoComplete.textSuggest}" queryDelay="100" minQueryLength="1" />  
-			</h:form>
-		</div>		
+
 	</div>
 
 
