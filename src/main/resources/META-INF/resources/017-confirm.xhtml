@@ -74,12 +74,40 @@
 						icon="ui-icon-alert" />						
 				</p:commandButton>
 				
-				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" widgetVar="confirmationDialog">
+					    <f:facet name="message">
+					          <h:outputText value="Are you sure all details 
+					                           are correct and proceed in creating the Account?" />        
+					    </f:facet>
+					    				
 					<p:commandButton value="Yes" type="button"
-						styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+						styleClass="ui-confirmdialog-yes" icon="ui-icon-check">																		
+					</p:commandButton>
+										
 					<p:commandButton value="No" type="button"
 						styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+						
+					<p:commandButton value="test" type="button" icon="ui-icon-close" onclick="confirmationDialog.hide()">
+					</p:commandButton>
+						
 				</p:confirmDialog>
+				
+				<!-- 
+					<p:confirmDialog header="Confirm" severity="alert" closeOnEscape="true" widgetVar="confirmationDialog" showEffect="fold" >
+					    <f:facet name="message">
+					          <h:outputText value="Are you sure all details 
+					                           are correct and proceed in creating the Account?" />        
+					    </f:facet>
+					    <p:commandButton value="Yes" actionListener="#{marketingPersonController.create}" 
+					                     oncomplete="confirmationDialog.hide()" icon="ui-icon-check"
+					                     update="propertyPanel accountPanel marketingPersonPanel">
+					         <f:ajax rendered="propertyPanel accountPanel marketingPersonPanel"/>
+					    </p:commandButton>
+					
+					    <p:commandButton value="No" onclick="confirmationDialog.hide()" type="button" 
+					                     icon="ui-icon-close"/>
+					</p:confirmDialog>								
+				 -->
 
 			</h:form>
 		</div>
