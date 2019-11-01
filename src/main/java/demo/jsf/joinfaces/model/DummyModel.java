@@ -1,9 +1,11 @@
 package demo.jsf.joinfaces.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
@@ -13,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 
 
 @Named
-@RequestScoped
+@SessionScoped
 @Data
 @Slf4j
 public class DummyModel {
@@ -29,6 +31,10 @@ public class DummyModel {
 	private String dummy2 = "dummy2";
 	
 	private String hiddenMessage ="this is a hidden message";
+	
+	public void execute() {
+		this.hiddenMessage = "executed! " + new Date();
+	}
 	
 	public void add() {
 		result = param1+param2;
@@ -58,10 +64,6 @@ public class DummyModel {
     	
     	a.add(new Dummy(1,"abc","message 1"));
     	a.add(new Dummy(2,"xyz","message 2"));
-    	
-    	Dummy b = new Dummy(2,"xyz","message 2");    	
-        	
-    	
     	
     	return a;
     }
