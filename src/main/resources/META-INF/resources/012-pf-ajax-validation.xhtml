@@ -69,10 +69,10 @@
 			<h:form>
 
 				<p:growl id="growl" for="msg" showDetail="true" sticky="true" />
-				
-			    <p:messages id="messages" showDetail="false" closable="true">
-			        <p:autoUpdate />
-			    </p:messages>				
+
+				<p:messages id="messages" showDetail="false" closable="true">
+					<p:autoUpdate />
+				</p:messages>
 
 				<p:panel header="Ajax Validataion">
 					<h:panelGrid columns="1" cellpadding="1">
@@ -80,18 +80,17 @@
 							<h:outputLabel for="hiddenMessage" value="hiddenMessage: "
 								style="font-weight:bold" />
 							<p:inputText id="hiddenMessage"
-								value="#{dummyModel.hiddenMessage}"  required="true" >
-								<f:validateLength minimum="50"/>  
+								value="#{dummyModel.hiddenMessage}" required="true">
+								<f:validateLength minimum="50" />
 							</p:inputText>
-							<h:message for="hiddenMessage" />  
-							
-							<p:commandButton value="Submit" update="display @form" actionListener="#{dummyModel.execute}"
-								icon="ui-icon-check" />
+							<h:message for="hiddenMessage" />
+
+							<p:commandButton value="Submit" update="display @form"
+								actionListener="#{dummyModel.execute}" icon="ui-icon-check" />
 							<h:outputText id="display" value="#{dummyModel.hiddenMessage}" />
 						</h:panelGrid>
 					</h:panelGrid>
 				</p:panel>
-
 
 
 			</h:form>
