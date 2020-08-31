@@ -2,6 +2,8 @@ package demo.jsf.joinfaces.model;
 
 import java.io.Serializable;
 import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -21,203 +23,297 @@ import org.primefaces.model.ScheduleEvent;
 import org.primefaces.model.ScheduleModel;
 import org.primefaces.model.LazyScheduleModel;
 
-
 @Named
-//@ViewScoped
-@SessionScoped
+@ViewScoped
 public class ScheduleView implements Serializable {
-
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -7423434330985361707L;
-
-	private ScheduleModel eventModel;
-
+ 
+    private ScheduleModel eventModel;
+     
     private ScheduleModel lazyEventModel;
-
+ 
     private ScheduleEvent event = new DefaultScheduleEvent();
-
+ 
+    private boolean showWeekends = true;
+    private boolean tooltip = true;
+    private boolean allDaySlot = true;
+ 
+    private String timeFormat;
+    private String slotDuration="00:30:00";
+    private String slotLabelInterval;
+    private String scrollTime="06:00:00";
+    private String minTime="04:00:00";
+    private String maxTime="20:00:00";
+    private String locale="en";
+    private String timeZone="";
+    private String clientTimeZone="local";
+    private String columnHeaderFormat="";
+ 
     @PostConstruct
-    public void init() throws ParseException {
+    public void init() {
         eventModel = new DefaultScheduleModel();
-//        新增事件
-        eventModel.addEvent(new DefaultScheduleEvent("Champions League Match", previousDay8Pm(), previousDay8Pm()));
-        eventModel.addEvent(new DefaultScheduleEvent("Birthday Party", today1Pm(), today6Pm()));
-        eventModel.addEvent(new DefaultScheduleEvent("Breakfast at Tiffanys", nextDay9Am(), nextDay11Am()));
-        eventModel.addEvent(new DefaultScheduleEvent("Plant the new garden stuff", theDayAfter3Pm(), fourDaysLater3pm()));
-
-//        实现延迟加载时
+ 
+        DefaultScheduleEvent event = DefaultScheduleEvent.builder()
+                .title("Champions League Match")
+                .startDate(previousDay8Pm())
+                .endDate(previousDay11Pm())
+                .description("Team A vs. Team B")
+                .build();
+        eventModel.addEvent(event);
+ 
+        event = DefaultScheduleEvent.builder()
+                .title("Birthday Party")
+                .startDate(today1Pm())
+                .endDate(today6Pm())
+                .description("Aragon")
+                .overlapAllowed(true)
+                .build();
+        eventModel.addEvent(event);
+ 
+        event = DefaultScheduleEvent.builder()
+                .title("Breakfast at Tiffanys")
+                .startDate(nextDay9Am())
+                .endDate(nextDay11Am())
+                .description("all you can eat")
+                .overlapAllowed(true)
+                .build();
+        eventModel.addEvent(event);
+ 
+        event = DefaultScheduleEvent.builder()
+                .title("Plant the new garden stuff")
+                .startDate(theDayAfter3Pm())
+                .endDate(fourDaysLater3pm())
+                .description("Trees, flowers, ...")
+                .build();
+        eventModel.addEvent(event);
+ 
+        DefaultScheduleEvent scheduleEventAllDay=DefaultScheduleEvent.builder()
+                .title("Holidays (AllDay)")
+                .startDate(sevenDaysLater0am())
+                .endDate(eightDaysLater0am())
+                .description("sleep as long as you want")
+                .allDay(true)
+                .build();
+        eventModel.addEvent(scheduleEventAllDay);
+ 
         lazyEventModel = new LazyScheduleModel() {
-
-            /**
-			 * 
-			 */
-			private static final long serialVersionUID = 9216145445115604375L;
-
-			@Override
-            public void loadEvents(Date start, Date end) {
-                Date random = getRandomDate(start);
-                addEvent(new DefaultScheduleEvent("Lazy Event 1", random, random));
-
-                random = getRandomDate(start);
-                addEvent(new DefaultScheduleEvent("Lazy Event 2", random, random));
+             
+            @Override
+            public void loadEvents(LocalDateTime start, LocalDateTime end) {
+                for (int i=1; i<=5; i++) {
+                    LocalDateTime random = getRandomDateTime(start);
+                    addEvent(DefaultScheduleEvent.builder().title("Lazy Event " + i).startDate(random).endDate(random.plusHours(3)).build());
+                }
             }
         };
     }
-
-    public Date getRandomDate(Date base) {
-        Calendar date = Calendar.getInstance();
-        date.setTime(base);
-
-        //set random day of month
-        date.add(Calendar.DATE, ((int)(Math.random()*30)) + 1);
-
-        return date.getTime();
+     
+    public LocalDateTime getRandomDateTime(LocalDateTime base) {
+        LocalDateTime dateTime = base.withMinute(0).withSecond(0).withNano(0);
+        return dateTime.plusDays(((int) (Math.random()*30)));
     }
-
-    public Date getInitialDate() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(calendar.get(Calendar.YEAR), Calendar.FEBRUARY, calendar.get(Calendar.DATE), 0, 0, 0);
-
-        return calendar.getTime();
-    }
-
+     
+ 
     public ScheduleModel getEventModel() {
         return eventModel;
     }
-
-
+     
     public ScheduleModel getLazyEventModel() {
         return lazyEventModel;
     }
-
-    private Calendar today(){
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE), 0, 0, 0);
-
-        return  calendar;
+ 
+    private LocalDateTime previousDay8Pm() {
+        return LocalDateTime.now().minusDays(1).withHour(20).withMinute(0).withSecond(0).withNano(0);
     }
-
-    private Date previousDay8Pm(){
-        Calendar t = (Calendar) today().clone();
-        t.set(Calendar.AM_PM, Calendar.PM);
-        t.set(Calendar.DATE, t.get(Calendar.DATE) - 1);
-        t.set(Calendar.HOUR, 8);
-
-        System.out.println(t.getTime());
-        return t.getTime();
+     
+    private LocalDateTime previousDay11Pm() {
+        return LocalDateTime.now().minusDays(1).withHour(23).withMinute(0).withSecond(0).withNano(0);
     }
-
-    private Date previousDay11Pm() {
-        Calendar t = (Calendar) today().clone();
-        t.set(Calendar.AM_PM, Calendar.PM);
-        t.set(Calendar.DATE, t.get(Calendar.DATE) - 1);
-        t.set(Calendar.HOUR, 11);
-
-        return t.getTime();
+     
+    private LocalDateTime today1Pm() {
+        return LocalDateTime.now().withHour(13).withMinute(0).withSecond(0).withNano(0);
     }
-
-    private Date today1Pm() {
-        Calendar t = (Calendar) today().clone();
-        t.set(Calendar.AM_PM, Calendar.PM);
-        t.set(Calendar.HOUR, 1);
-
-        return t.getTime();
+     
+    private LocalDateTime theDayAfter3Pm() {
+        return LocalDateTime.now().plusDays(1).withHour(15).withMinute(0).withSecond(0).withNano(0);
     }
-
-    private Date theDayAfter3Pm() {
-        Calendar t = (Calendar) today().clone();
-        t.set(Calendar.DATE, t.get(Calendar.DATE) + 2);
-        t.set(Calendar.AM_PM, Calendar.PM);
-        t.set(Calendar.HOUR, 3);
-
-        return t.getTime();
+ 
+    private LocalDateTime today6Pm() {
+        return LocalDateTime.now().withHour(18).withMinute(0).withSecond(0).withNano(0);
     }
-
-    private Date today6Pm() {
-        Calendar t = (Calendar) today().clone();
-        t.set(Calendar.AM_PM, Calendar.PM);
-        t.set(Calendar.HOUR, 6);
-
-        return t.getTime();
+     
+    private LocalDateTime nextDay9Am() {
+        return LocalDateTime.now().plusDays(1).withHour(9).withMinute(0).withSecond(0).withNano(0);
     }
-
-    private Date nextDay9Am() {
-        Calendar t = (Calendar) today().clone();
-        t.set(Calendar.AM_PM, Calendar.AM);
-        t.set(Calendar.DATE, t.get(Calendar.DATE) + 1);
-        t.set(Calendar.HOUR, 9);
-
-        return t.getTime();
+     
+    private LocalDateTime nextDay11Am() {
+        return LocalDateTime.now().plusDays(1).withHour(11).withMinute(0).withSecond(0).withNano(0);
     }
-
-    private Date nextDay11Am() {
-        Calendar t = (Calendar) today().clone();
-        t.set(Calendar.AM_PM, Calendar.AM);
-        t.set(Calendar.DATE, t.get(Calendar.DATE) + 1);
-        t.set(Calendar.HOUR, 11);
-
-        return t.getTime();
+     
+    private LocalDateTime fourDaysLater3pm() {
+        return LocalDateTime.now().plusDays(4).withHour(15).withMinute(0).withSecond(0).withNano(0);
     }
-
-    private Date fourDaysLater3pm() {
-        Calendar t = (Calendar) today().clone();
-        t.set(Calendar.AM_PM, Calendar.PM);
-        t.set(Calendar.DATE, t.get(Calendar.DATE) + 4);
-        t.set(Calendar.HOUR, 3);
-
-        return t.getTime();
+ 
+    private LocalDateTime sevenDaysLater0am() {
+        return LocalDateTime.now().plusDays(7).withHour(0).withMinute(0).withSecond(0).withNano(0);
     }
-
+ 
+    private LocalDateTime eightDaysLater0am() {
+        return LocalDateTime.now().plusDays(7).withHour(0).withMinute(0).withSecond(0).withNano(0);
+    }
+     
+    public LocalDate getInitialDate() {
+        return LocalDate.now().plusDays(1);
+    }
+ 
     public ScheduleEvent getEvent() {
         return event;
     }
-
+ 
     public void setEvent(ScheduleEvent event) {
         this.event = event;
     }
-
-    public void addEvent(){
-    	
-    	System.out.println("add event");    	
-    	System.out.println("event id: " + event.getId());    	
-    	System.out.println("event title: " + event.getTitle());
-    	
-        if (event.getId() == null) {
-        	
-        	System.out.println("add event: " + event.toString());
-        	
-            eventModel.addEvent(event);
-        } else {
-            eventModel.updateEvent(event);
+     
+    public void addEvent() {
+        if (event.isAllDay()) {
+            //see https://github.com/primefaces/primefaces/issues/1164
+            if (event.getStartDate().toLocalDate().equals(event.getEndDate().toLocalDate())) {
+                event.setEndDate(event.getEndDate().plusDays(1));
+            }
         }
-        
+ 
+        if(event.getId() == null)
+            eventModel.addEvent(event);
+        else
+            eventModel.updateEvent(event);
+         
         event = new DefaultScheduleEvent();
-        
     }
-
-    public void onEventSelect(SelectEvent selectEvent){
-        event = (ScheduleEvent) selectEvent.getObject();
+     
+    public void onEventSelect(SelectEvent<ScheduleEvent> selectEvent) {
+        event = selectEvent.getObject();
     }
-
-    public void onDateSelect(SelectEvent selectEvent){
-        event = new DefaultScheduleEvent("", (Date) selectEvent.getObject(), (Date)selectEvent.getObject());
+     
+    public void onDateSelect(SelectEvent<LocalDateTime> selectEvent) {
+        event = DefaultScheduleEvent.builder().startDate(selectEvent.getObject()).endDate(selectEvent.getObject().plusHours(1)).build();
     }
-
-    public void onEventMove(ScheduleEntryMoveEvent event){
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Event Moved", "Day delta:" + event.getDayDelta() + ",Minute delta:" + event.getMinuteDelta());
-
+     
+    public void onEventMove(ScheduleEntryMoveEvent event) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Event moved", "Delta:" + event.getDeltaAsDuration());
+         
         addMessage(message);
     }
-
+     
     public void onEventResize(ScheduleEntryResizeEvent event) {
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Event resized", "Day delta:" + event.getDayDelta() + ", Minute delta:" + event.getMinuteDelta());
-
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Event resized", "Start-Delta:" + event.getDeltaStartAsDuration() + ", End-Delta: " + event.getDeltaEndAsDuration());
+         
         addMessage(message);
     }
-
-    private void addMessage(FacesMessage message){
+     
+    private void addMessage(FacesMessage message) {
         FacesContext.getCurrentInstance().addMessage(null, message);
+    }
+ 
+    public boolean isShowWeekends() {
+        return showWeekends;
+    }
+ 
+    public void setShowWeekends(boolean showWeekends) {
+        this.showWeekends = showWeekends;
+    }
+ 
+    public boolean isTooltip() {
+        return tooltip;
+    }
+ 
+    public void setTooltip(boolean tooltip) {
+        this.tooltip = tooltip;
+    }
+ 
+    public boolean isAllDaySlot() {
+        return allDaySlot;
+    }
+ 
+    public void setAllDaySlot(boolean allDaySlot) {
+        this.allDaySlot = allDaySlot;
+    }
+ 
+    public String getTimeFormat() {
+        return timeFormat;
+    }
+ 
+    public void setTimeFormat(String timeFormat) {
+        this.timeFormat = timeFormat;
+    }
+ 
+    public String getSlotDuration() {
+        return slotDuration;
+    }
+ 
+    public void setSlotDuration(String slotDuration) {
+        this.slotDuration = slotDuration;
+    }
+ 
+    public String getSlotLabelInterval() {
+        return slotLabelInterval;
+    }
+ 
+    public void setSlotLabelInterval(String slotLabelInterval) {
+        this.slotLabelInterval = slotLabelInterval;
+    }
+ 
+    public String getScrollTime() {
+        return scrollTime;
+    }
+ 
+    public void setScrollTime(String scrollTime) {
+        this.scrollTime = scrollTime;
+    }
+ 
+    public String getMinTime() {
+        return minTime;
+    }
+ 
+    public void setMinTime(String minTime) {
+        this.minTime = minTime;
+    }
+ 
+    public String getMaxTime() {
+        return maxTime;
+    }
+ 
+    public void setMaxTime(String maxTime) {
+        this.maxTime = maxTime;
+    }
+ 
+    public String getLocale() {
+        return locale;
+    }
+ 
+    public void setLocale(String locale) {
+        this.locale = locale;
+    }
+ 
+    public String getTimeZone() {
+        return timeZone;
+    }
+ 
+    public void setTimeZone(String timeZone) {
+        this.timeZone = timeZone;
+    }
+ 
+    public String getClientTimeZone() {
+        return clientTimeZone;
+    }
+ 
+    public void setClientTimeZone(String clientTimeZone) {
+        this.clientTimeZone = clientTimeZone;
+    }
+ 
+    public String getColumnHeaderFormat() {
+        return columnHeaderFormat;
+    }
+ 
+    public void setColumnHeaderFormat(String columnHeaderFormat) {
+        this.columnHeaderFormat = columnHeaderFormat;
     }
 }
