@@ -52,6 +52,12 @@
 			<groupId>org.joinfaces</groupId>
 			<artifactId>primefaces-spring-boot-starter</artifactId>
 		</dependency>
+		
+	      <dependency>
+	        <groupId>org.primefaces</groupId>
+	        <artifactId>primefaces</artifactId>
+	        <version>8.0.3</version>
+	      </dependency>		
 	
 		<!-- <dependency> <groupId>org.joinfaces</groupId> <artifactId>adminfaces-spring-boot-starter</artifactId> 
 			</dependency> -->
