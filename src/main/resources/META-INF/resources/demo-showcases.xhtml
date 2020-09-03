@@ -75,6 +75,8 @@
 		
 		<p:panel header="Simple Widgets Demo" >
 		
+			<p:editor id="editor" widgetVar="editorWidget" value="#{helloWorld.message}" width="600" />
+		
 			<h:panelGrid columns="2" cellpadding="4">
 
 				<h:outputText value="First Name: " />
@@ -82,8 +84,9 @@
 
 				<h:outputText value="Last Name: " />
 				<p:inputText value="#{helloWorld.lastName}" />
+								
 
-				<p:commandButton value="Submit" update="greeting" oncomplete="PF('greetingDialog').show()" />
+				<p:commandButton value="Submit" action="#{helloWorld.processMessage()}" update="greeting editor" oncomplete="PF('greetingDialog').show()" />
 				
 				<p:commandButton value="redirect to greeting page: Greeting" action="greeting?faces-redirect=true" />				
 				
@@ -93,12 +96,16 @@
 			</h:panelGrid>
 			
 		</p:panel>
+		
+		
 
 		<p:dialog header="Greeting" widgetVar="greetingDialog" modal="true" resizable="false">
 			<h:panelGrid id="greeting" columns="1" cellpadding="4">
 				<h:outputText value="#{helloWorld.showGreeting()}" />
 			</h:panelGrid>
 		</p:dialog>
+		
+		
 	</h:form>
 
 	<h:form onsubmit="this.action='#{request.contextPath}/logout';" class="logout-form">
