@@ -3,7 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:sec="http://www.springframework.org/security/tags">
+	xmlns:sec="http://www.springframework.org/security/tags"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	>
 
 <h:head>
 	<title>JSF Demo</title>
@@ -104,6 +106,18 @@
 				<h:outputText value="#{helloWorld.showGreeting()}" />
 			</h:panelGrid>
 		</p:dialog>
+		
+	<pe:qrCode id="qrCodeElem" 
+           renderMethod="canvas" 
+           renderMode="2" 
+           text="0000000000000000000000000000000000"
+           label="Label Label "
+           size="200"                 
+           fillColor="7d767d"
+           fontName="Ubuntu"
+           fontColor="#01A9DB"
+           ecLevel="H"                   
+           radius="0.5"/>
 		
 		
 	</h:form>

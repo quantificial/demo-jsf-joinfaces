@@ -58,6 +58,13 @@
         <artifactId>primefaces</artifactId>
         <version>7.0.15</version>
       </dependency>
+<!-- https://mvnrepository.com/artifact/org.primefaces.extensions/primefaces-extensions -->
+<dependency>
+    <groupId>org.primefaces.extensions</groupId>
+    <artifactId>primefaces-extensions</artifactId>
+    <version>7.0.3</version>
+</dependency>
+
 		
 	
 		<!-- <dependency> <groupId>org.joinfaces</groupId> <artifactId>adminfaces-spring-boot-starter</artifactId> 
@@ -150,6 +157,18 @@
 		    <version>1.13.1</version>
 		</dependency>
 		
+	<dependency>
+    <groupId>net.glxn</groupId>
+    <artifactId>qrgen</artifactId>
+    <version>1.4</version>
+</dependency>
+<dependency>
+    <groupId>net.sf.barcode4j</groupId>
+    <artifactId>barcode4j-light</artifactId>
+    <version>2.1</version>
+</dependency>
+
+
 		
     <dependency>
       <groupId>org.springframework.boot</groupId>
